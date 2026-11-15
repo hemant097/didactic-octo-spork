@@ -1,18 +1,14 @@
 package org.novice.learnreactprog;
 
 import lombok.extern.slf4j.Slf4j;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.BaseSubscriber;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.SignalType;
 
 import java.time.Duration;
 
 @Component
 @Slf4j
-public class LearnFlux {
+public class LearnReactor {
 
     public void learnReactor(){
         //a publisher
@@ -99,7 +95,7 @@ public class LearnFlux {
 //                ()->{log.info("onComplete");} // completeConsumer
 //        );
 
-        //using operators
+        //using processors
         fruits
                 .doOnSubscribe((subscription)->log.info("onSubscriptionHook"))
                 .doOnNext(item-> log.info("doing nothing"))
