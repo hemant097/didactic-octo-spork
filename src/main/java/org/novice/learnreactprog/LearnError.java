@@ -2,6 +2,7 @@ package org.novice.learnreactprog;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
@@ -31,8 +32,11 @@ public class LearnError {
         });
 
         fromCallable
+                .doOnError(err -> log.error("Error logged: {}", err.getMessage(),err)) //can be used for side effects like logging
 //                .onErrorComplete() //ignores the error, and moves on
-                .onErrorReturn("fallback value is being returned")
+//                .onErrorReturn("fallback value is being returned") //returns a default value, when error occurs and complete the stream
+//                .onErrorResume(err -> Mono.just("on error resume data")) // fallback to another stream (alternative Flux/Mono)
+                .onErrorMap((err)-> new IllegalArgumentException("Illegal argument")) //transforming exception
                 .subscribe(data->log.info("data: {}",data))
                 ;
 
