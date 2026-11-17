@@ -23,7 +23,7 @@ public class LearnReactProgApplication implements CommandLineRunner {
 //    learnOperators.learnMaps();
 //    learnOperators.learnAggregationOps();
 //        learnError.errorHandlingWithTryCatch();
-        learnError.learnReactiveErrorHandling();
+//        learnError.learnReactiveErrorHandling();
     }
 
 

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: LearnReactProg
+#  threads.virtual.enabled: true
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/week20_reactive
+    username: postgres
+    password: root
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+
+
+
+server:
+  port: 8080
+  netty:
+    connection-timeout: 20s
+    idle-timeout: 60s
