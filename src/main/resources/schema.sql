@@ -1,4 +1,4 @@
-DROP table if exists users;
+-- DROP table if exists users;
 
 create table if not exists users(
     id      BIGSERIAL primary key,
