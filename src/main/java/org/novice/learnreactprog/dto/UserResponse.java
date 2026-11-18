@@ -6,8 +6,6 @@ import org.novice.learnreactprog.entity.User;
 import java.time.LocalDateTime;
 
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
 @Builder
 public class UserResponse {

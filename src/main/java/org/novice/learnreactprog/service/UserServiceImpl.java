@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
+
 
 @Service
 @Slf4j
@@ -24,7 +26,8 @@ public class UserServiceImpl implements UserService{
     public Mono<UserResponse> getUserById(Long id) {
         return userRepository.findById(id)
                 .switchIfEmpty(Mono.error(new ResourceNotFoundException("user",id)))
-                .map(user -> UserResponse.from(user));
+                .map(user ->  UserResponse.from(user))
+                .doOnSuccess((userResp)->log.info("user response received successfully with id: {}, at time: {}",userResp.getId(), LocalDateTime.now()));
     }
 
     @Override
