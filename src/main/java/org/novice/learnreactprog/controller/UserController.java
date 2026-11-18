@@ -34,7 +34,7 @@ public class UserController {
 //    }
 //
 //    @PostMapping
-//    public Mono<ResponseEntity<UserResponse>> createUser(@RequestBody UserRequest request){
+//    public Mono<ResponseEntity<UserResponse>> createUser(@Valid @RequestBody UserRequest request){
 //        return userService.createUser(request)
 //                .map(userResponse -> ResponseEntity.status(HttpStatus.CREATED)
 //                        .body(userResponse));
