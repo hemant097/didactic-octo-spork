@@ -7,6 +7,8 @@ spring:
     url: r2dbc:postgresql://localhost:5432/week20_reactive
     username: postgres
     password: root
+    properties:
+      fetchSize: 1000  #now JVM heap holds at most 1000 rows at a time, The rest stay in PostgreSQL until requested by backpressure from the subscriber
   sql:
     init:
       mode: always

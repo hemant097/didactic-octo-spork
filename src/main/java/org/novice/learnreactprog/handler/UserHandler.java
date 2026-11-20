@@ -41,28 +41,14 @@ public class UserHandler {
                         .bodyValue(createdUser));
     }
 
-//    private Mono<UserRequest> validate(UserRequest request) {
-//        Set<ConstraintViolation<UserRequest>> violations = validator.validate(request);
-//        if(!violations.isEmpty()){
-//            Map<String,String> errors = violations.stream()
-//                    .collect(Collectors.toMap(
-//                            k -> k.getPropertyPath().toString(),
-//                            v-> v.getMessage(),
-//                            (k,v) -> k
-//                    ));
-//            throw new ValidationException(errors.toString());
-//        }
-//        return Mono.just(request);
-//    }
-
     public Mono<ServerResponse> getById(ServerRequest request) {
 
         Long userId = parseId(request);
 
-        return ServerResponse.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body( userService.getUserById(userId),
-                        UserResponse.class);
+        return userService.getUserById(userId)
+                .flatMap(userResponse -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(userResponse));
     }
 
     private Long parseId(ServerRequest request){

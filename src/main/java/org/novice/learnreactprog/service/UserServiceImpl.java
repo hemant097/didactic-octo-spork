@@ -11,6 +11,7 @@ import org.springframework.data.r2dbc.config.EnableR2dbcAuditing;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.time.LocalDateTime;
 
@@ -38,6 +39,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Mono<UserResponse> createUser(UserRequest request) {
+
+//        this particular request will not block the netty thread, this will execute on some other thread, but should be avoided, if we want to go complete reactive
+//        Mono.fromCallable( ()-> userRepository.existsByEmail(request.getEmail()))
+//                .subscribeOn(Schedulers.boundedElastic());
+
         return userRepository
                 .existsByEmail(request.getEmail())
                 .flatMap(exists -> {

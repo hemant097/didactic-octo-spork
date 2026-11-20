@@ -16,5 +16,12 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse(rnfe.getMessage())));
     }
 
+    @ExceptionHandler(Exception.class)
+    public Mono<ResponseEntity<ErrorResponse>> handler(Exception e){
+        return Mono.just(ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ErrorResponse(e.getMessage())));
+    }
+
 
 }
